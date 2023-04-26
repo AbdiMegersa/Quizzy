@@ -1,21 +1,62 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
+import SelectField from '../components/SelectField'
+import { Box, Button, CircularProgress } from '@mui/material';
+import TextFieldComp from '../components/TextFieldComp';
+import useAxios from '../hooks/useAxios'
+import { useNavigate } from 'react-router-dom';
 
 function HomeScreen(props) {
 
-    const startElement = <div className="quiz-info">
-        <p> HOME Screen</p>
-        <h1>Quizzy</h1>
-        <p>Quizzy is powered by Open trivial Database API <br />The Open Trivia Database provides a completely free JSON API for use in programming projects. Use of this API does not require a API Key, just generate the URL below use it in your own application to retrieve trivia questions</p>
-        <Link to="/quiz">
-            <button> Start Quiz </button>
-        </Link>
-    </div>
+    const {response, error, loading} = useAxios( {url: "/api_category.php"})
+    const navigate = useNavigate();
+
+    if(loading) {
+        return (
+            <Box className="home-screen">
+                <CircularProgress />
+            </Box>
+        )
+    }
+    if (error) {
+        return (
+            <Box className="home-screen">
+                <h1>Something went wrong!</h1>
+            </Box>
+        )
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('hello mf')
+        navigate('/quiz')
+    }
+
+    const difficultyOptions = [
+        {id: "easy", name: "Easy"},
+        {id: "medium", name: "Medium"},
+        {id: "hard", name: "Hard"},
+    ]
+    const typeOptions = [
+        {id: "multiple", name: "Multiple Choice"},
+        {id: "boolean", name: "True/False"},
+    ]
+
+
 
     return(
-        <div className="home-screen">
-            {startElement}
-        </div>
+        <form className="home-screen" onSubmit={handleSubmit}>
+            <h1>Home Screen / Setting Screen</h1>
+            <SelectField options={response.trivia_categories} label="Catagory" />
+            <SelectField options={difficultyOptions} label="Difficulty" />
+            <SelectField options={typeOptions} label="Type" />
+            <TextFieldComp />
+            <Box mt={2}>
+                <Button type="submit" fullWidth variant="contained">
+                    Get Started
+                </Button>
+            </Box>
+        </form>
     )
 
 }
