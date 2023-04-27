@@ -7,12 +7,27 @@ body {
   background-color: #0B2434;
 }
 
+.dev {
+  width: 20%;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  background-color: #113348;
+  padding: 11px;
+  border-radius: 5px;
+}
+
+.dev a {
+  text-decoration: none;
+  color: white;
+}
+
 .home-screen,
 .quiz-screen,
 .result-screen {
   margin: auto;
-  margin-top: 12px;
-  height: 600px;
+  margin-top: 25px;
+  height: 500px;
   max-height: 900px;
   width: 700px;
   max-width: 800px;
@@ -22,6 +37,7 @@ body {
   align-items: center;
   border-radius: 16px;
   background-color: #F5F5F5;
+  padding: 0 40px;
 }
 
 .take-quiz {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'    
 import SelectField from '../components/SelectField'
 import { Box, Button, CircularProgress } from '@mui/material';
 import TextFieldComp from '../components/TextFieldComp';
@@ -46,7 +46,7 @@ function HomeScreen(props) {
 
     return(
         <form className="home-screen" onSubmit={handleSubmit}>
-            <h1>Home Screen / Setting Screen</h1>
+            <h1>Settings</h1>
             <SelectField options={response.trivia_categories} label="Catagory" />
             <SelectField options={difficultyOptions} label="Difficulty" />
             <SelectField options={typeOptions} label="Type" />
